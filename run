@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$run = new Foundation\Console\Run;
+$executeState = $run->execute($argv);
+$executeState === true ? exit(0) : exit(1); 

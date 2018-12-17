@@ -9,5 +9,5 @@
             "App\\": "app/",
             "Foundation\\": "src/"
         }
-    },
+    }
 }
