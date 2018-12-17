@@ -17,10 +17,10 @@ class Run {
             if(array_key_exists($commandName, $this->commandsWhitelist)) {
                 return $this->executeCommand($this->commandsWhitelist[$commandName], $args);
             }
-            echo "inside if";
+
             return $this->outputHelp();
         }
-        echo "outside if";
+        
         return $this->outputHelp();
     }
 

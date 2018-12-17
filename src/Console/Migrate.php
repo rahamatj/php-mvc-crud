@@ -2,9 +2,15 @@
 
 namespace Foundation\Console;
 
+use Foundation\Database\Migration;
+use Foundation\Database\Connection;
+
 class Migrate {
     public function execute() {
-        echo "migrate";
-        return true;
+        $migration = new Migration(
+            Connection::make(require 'config/database.php')
+        );
+
+        $migration->migrate();
     }
 }
