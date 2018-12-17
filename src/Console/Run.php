@@ -5,7 +5,7 @@ namespace Foundation\Console;
 class Run {
 
     protected $commandsWhitelist = [
-        'migrate' => 'Foundation\Console\Migrate'
+        'migrate' => 'Foundation\Console\Migrate',
     ];
 
     public function execute($args) {
@@ -20,7 +20,7 @@ class Run {
 
             return $this->outputHelp();
         }
-        
+
         return $this->outputHelp();
     }
 

@@ -10,7 +10,7 @@ class App {
     }
 
     public static function get($key) {
-        if(! array_key_exists($key, $this->registry)) {
+        if(! array_key_exists($key, static::$registry)) {
             throw new Exception("No {$key} bound in the container!");
         }
 
