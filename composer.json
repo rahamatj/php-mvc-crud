@@ -1,0 +1,13 @@
+{
+    "name": "rahamatjahan/php-mvc-crud",
+    "type": "project",
+    "description": "This is a PHP CRUD following the MVC architectural pattern.",
+    "homepage": "https://github.com/rahamatjahan/php-mvc-crud",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Foundation\\": "src/"
+        }
+    },
+}
