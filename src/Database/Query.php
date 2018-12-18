@@ -11,11 +11,15 @@ trait Query {
         return static::class;
     }
 
+    public static function table() {
+        return static::$table;
+    }
+
     public static function all() {
         return App::get('query')->all(static::$table, static::class);
     }
 
-    public static function table() {
-        return static::$table;
+    public static function find($id) {
+        return App::get('query')->find(static::$table, static::class, $id);
     }
 }

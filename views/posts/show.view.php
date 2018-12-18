@@ -6,7 +6,9 @@
             </div>
             <div class="col-md-6 text-right">
                 <a href="<?= route('/') ?>" class="btn btn-success">All</a>
-                <a href="<?= route('posts.edit') ?>" class="btn btn-info">Edit</a>
+                <a href="<?= route('posts.edit', [
+                        'post' => $post->id
+                    ]) ?>" class="btn btn-info">Edit</a>
                 <a href="<?= route('posts.destroy') ?>" class="btn btn-danger">Delete</a>
             </div>
         </header>
@@ -19,15 +21,17 @@
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-8">
-                                <h2 class="card-title">Special title treatment</h2>
+                                <h2 class="card-title"><?= $post->title ?></h2>
                             </div>
                             <div class="col-md-4 text-right">
-                                <span class="text-muted">Published at:</span>
+                                <span class="text-muted">Published at: <?= $post->created_at ?></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">
+                                    <?= $post->body ?>
+                                </p>
                             </div>
                         </div>
                     </div>

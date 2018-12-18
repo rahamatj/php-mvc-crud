@@ -21,9 +21,11 @@ class PostsController {
     }
 
     public function show() {
-        $id = $_GET['post'];
-        // var_dump($id);
-        //$post = Post::find($_GET['post']);
-        return view('posts.show');
+        $post = Post::find($_GET['post']);
+        // var_dump(route('posts.edit'));
+        // die();
+        return view('posts.show', [
+            'post' => Post::find($_GET['post'])
+        ]);
     }
 }
