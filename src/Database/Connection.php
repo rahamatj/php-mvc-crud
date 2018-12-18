@@ -3,6 +3,7 @@
 namespace Foundation\Database;
 
 use PDO;
+use PDOException;
 
 class Connection {
     public static function make($config) {

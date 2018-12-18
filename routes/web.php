@@ -17,7 +17,7 @@ Route::post('posts', [
     'as' => 'posts.store'
 ]);
 
-Route::get('posts/show', [
+Route::get('posts', [
     'uses' => 'PostsController@show',
     'as' => 'posts.show'
 ]);
@@ -27,7 +27,7 @@ Route::get('posts/edit', [
     'as' => 'posts.edit'
 ]);
 
-Route::post('posts/{post}/update', [
+Route::post('posts/update', [
     'uses' => 'PostsController@update',
     'as' => 'posts.update'
 ]);

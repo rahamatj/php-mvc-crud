@@ -2,6 +2,8 @@
 
 namespace Foundation;
 
+use Exception;
+
 class App {
     protected static $registry = [];
 

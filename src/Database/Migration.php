@@ -2,6 +2,7 @@
 
 namespace Foundation\Database;
 use PDO;
+use PDOException;
 
 class Migration {
     protected $pdo;

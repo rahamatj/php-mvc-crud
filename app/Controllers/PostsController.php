@@ -2,9 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Post;
+
 class PostsController {
+
     public function index() {
-        return view('posts.index');
+        return view('posts.index', [
+            'posts' => Post::all()
+        ]);
     }
 
     public function create() {
@@ -16,6 +21,9 @@ class PostsController {
     }
 
     public function show() {
+        $id = $_GET['post'];
+        // var_dump($id);
+        //$post = Post::find($_GET['post']);
         return view('posts.show');
     }
 }

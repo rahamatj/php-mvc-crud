@@ -1,5 +1,6 @@
 <?php
 
+use Exception;
 use Foundation\App;
 use Foundation\Http\Route;
 use Foundation\Http\Request;
@@ -16,13 +17,11 @@ function redirect($path = '') {
     return Redirect::redirect($path);
 }
 
-function formatUriParams($uri, $params) {
-    $paramKeys = array_map(function($paramKey) {
-        return "{" . $paramKey . "}";
-    }, array_keys($params));
-
-    $formattedUri = str_replace($paramKeys, $params, $uri);
-    return $formattedUri != '/' ? $formattedUri : '';
+function formatUri($uri, $params) {
+    $formattedUri = $uri;
+    if(!empty($params))
+        $formattedUri = $uri . '?' . http_build_query($params);
+    return $formattedUri != '/' ? base_url() . $formattedUri : base_url();
 }
 
 function route($name, $params = []) {
@@ -30,9 +29,9 @@ function route($name, $params = []) {
     $postRoutes = Route::postRoutesWithNamesAsKeys();
 
     if(array_key_exists($name, $getRoutes))
-        return base_url() . formatUriParams($getRoutes[$name]['uri'], $params);
+        return formatUri($getRoutes[$name]['uri'], $params);
     else if(array_key_exists($name, $postRoutes))
-        return base_url() . formatUriParams($postRoutes[$name]['uri'], $params);
+        return formatUri($postRoutes[$name]['uri'], $params);
     else
         throw new Exception("No route defined for this name!");
 }

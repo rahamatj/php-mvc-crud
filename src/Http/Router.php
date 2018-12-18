@@ -2,6 +2,8 @@
 
 namespace Foundation\Http;
 
+use Exception;
+
 class Router {
 
     protected static $routes = [
