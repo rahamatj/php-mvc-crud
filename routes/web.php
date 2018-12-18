@@ -7,11 +7,6 @@ Route::get('/', [
     'as' => '/'
 ]);
 
-Route::post('test/{test}/{ok}', [
-    'uses' => 'PostsController@test',
-    'as' => 'test'
-]);
-
 Route::get('posts/create', [
     'uses' => 'PostsController@create',
     'as' => 'posts.create'
@@ -22,12 +17,12 @@ Route::post('posts', [
     'as' => 'posts.store'
 ]);
 
-Route::get('posts/{post}', [
+Route::get('posts/show', [
     'uses' => 'PostsController@show',
     'as' => 'posts.show'
 ]);
 
-Route::get('posts/{post}/edit', [
+Route::get('posts/edit', [
     'uses' => 'PostsController@edit',
     'as' => 'posts.edit'
 ]);
@@ -35,11 +30,6 @@ Route::get('posts/{post}/edit', [
 Route::post('posts/{post}/update', [
     'uses' => 'PostsController@update',
     'as' => 'posts.update'
-]);
-
-Route::get('posts/{post}/status/change', [
-    'uses' => 'PostsController@changeStatus',
-    'as' => 'posts.status.change'
 ]);
 
 Route::post('posts/destroy', [

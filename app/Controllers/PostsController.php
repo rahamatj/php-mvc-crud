@@ -2,17 +2,20 @@
 
 namespace App\Controllers;
 
-use Foundation\Http\Route;
-
 class PostsController {
     public function index() {
-        var_dump(redirect()->route('test', [
-            'test' => 1,
-            'ok' => 2
-        ]));
+        return view('posts.index');
     }
 
-    public function test() {
+    public function create() {
+        return view('posts.create');
+    }
 
+    public function edit() {
+        return view('posts.edit');
+    }
+
+    public function show() {
+        return view('posts.show');
     }
 }

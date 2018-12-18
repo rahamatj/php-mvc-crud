@@ -9,7 +9,6 @@ class PostsTable {
         $table->increments('id');
         $table->string('title');
         $table->text('body');
-        $table->boolean('is_published');
         $table->timestamp('created_at');
 
         return $table;

@@ -1,13 +1,15 @@
 <?php
 
+use Foundation\App;
 use Foundation\Http\Route;
+use Foundation\Http\Request;
 use Foundation\Http\Redirect;
 
 function view($name, $data = []) {
     extract($data);
     $name = str_replace(['.'], '/', $name);
 
-    return require "views/{$name}.view.php";
+    return require __DIR__ . "/../views/{$name}.view.php";
 }
 
 function redirect($path = '') {
@@ -19,7 +21,8 @@ function formatUriParams($uri, $params) {
         return "{" . $paramKey . "}";
     }, array_keys($params));
 
-    return str_replace($paramKeys, $params, $uri);
+    $formattedUri = str_replace($paramKeys, $params, $uri);
+    return $formattedUri != '/' ? $formattedUri : '';
 }
 
 function route($name, $params = []) {
@@ -27,9 +30,17 @@ function route($name, $params = []) {
     $postRoutes = Route::postRoutesWithNamesAsKeys();
 
     if(array_key_exists($name, $getRoutes))
-        return formatUriParams($getRoutes[$name]['uri'], $params);
+        return base_url() . formatUriParams($getRoutes[$name]['uri'], $params);
     else if(array_key_exists($name, $postRoutes))
-        return formatUriParams($postRoutes[$name]['uri'], $params);
+        return base_url() . formatUriParams($postRoutes[$name]['uri'], $params);
     else
         throw new Exception("No route defined for this name!");
+}
+
+function app() {
+    return (object)App::get('app');
+}
+
+function base_url(){
+    return Request::baseUrl();
 }
