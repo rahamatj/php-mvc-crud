@@ -7,6 +7,16 @@ Route::get('/', [
     'as' => '/'
 ]);
 
+Route::post('test/{test}/{ok}', [
+    'uses' => 'PostsController@test',
+    'as' => 'test'
+]);
+
+Route::get('posts/create', [
+    'uses' => 'PostsController@create',
+    'as' => 'posts.create'
+]);
+
 Route::post('posts', [
     'uses' => 'PostsController@store',
     'as' => 'posts.store'

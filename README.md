@@ -20,3 +20,5 @@ This is a PHP CRUD following the MVC architectural pattern.
 * Change database configuration in ```config/database.php``` if necessary
 * ```composer install```
 * ```php run migrate```
+* ```cd public && php -S localhost:8080```
+* Open up a browser and go to http://localhost:8080

@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/../src/helpers.php';
+
 use Foundation\App;
 use Foundation\Database\Connection;
 use Foundation\Database\QueryBuilder;
