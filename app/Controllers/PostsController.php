@@ -50,4 +50,10 @@ class PostsController {
             'post' => Post::find($_GET['post'])
         ]);
     }
+
+    public function destroy() {
+        Post::find($_GET['post'])->delete();
+
+        return redirect()->route('/');
+    }
 }

@@ -49,7 +49,15 @@
                                     <a href="<?= route('posts.edit', [
                                             'post' => $post->id
                                         ]) ?>" class="btn btn-info">Edit</a>
-                                    <a href="<?= route('posts.destroy') ?>" class="btn btn-danger">Delete</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"
+                                        onclick="event.preventDefault();
+                                                    if(confirm('Are you sure you want to delete this?')) {
+                                                        document.getElementById('delete-post-form-<?= $post->id ?>').submit();
+                                                    }">Delete</a>
+                                    <form action="<?= route('posts.destroy', [
+                                            'post' => $post->id
+                                        ]) ?>" method="post" id="delete-post-form-<?= $post->id ?>"
+                                        style="display:none;"></form>
                                 </div>
                             </div>
                         </div>

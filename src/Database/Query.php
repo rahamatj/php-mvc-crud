@@ -30,4 +30,8 @@ trait Query {
     public function update($data) {
         return App::get('query')->update(static::$table, $data, $this->id);
     }
+
+    public function delete() {
+        return APP::get('query')->delete(static::$table, $this->id);
+    }
 }
