@@ -7,8 +7,6 @@ use App\Post;
 class PostsController {
 
     public function index() {
-        // var_dump(redirect()->route('/'));
-        // die();
         return view('posts.index', [
             'posts' => Post::all()
         ]);
@@ -19,17 +17,32 @@ class PostsController {
     }
 
     public function store() {
-        Post::create([
+        $postId = Post::create([
             'title' => $_POST['title'],
             'body' => $_POST['body']
         ]);
 
-        // return header("Location: http://localhost:8080/");
-        return redirect()->route('/');
+        return redirect()->route('posts.show', [
+            'post' => $postId
+        ]);
     }
 
     public function edit() {
-        return view('posts.edit');
+        return view('posts.edit', [
+            'post' =>Post::find($_GET['post'])
+        ]);
+    }
+
+    public function update() {
+        $post = Post::find($_GET['post']);
+        $post->update([
+            'title' => $_POST['title'],
+            'body' => $_POST['body']
+        ]);
+
+        return redirect()->route('posts.show', [
+            'post' => $post->id
+        ]);
     }
 
     public function show() {

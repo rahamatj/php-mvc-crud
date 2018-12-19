@@ -26,4 +26,8 @@ trait Query {
     public static function create($data) {
         return App::get('query')->create(static::$table, $data);
     }
+
+    public function update($data) {
+        return App::get('query')->update(static::$table, $data, $this->id);
+    }
 }

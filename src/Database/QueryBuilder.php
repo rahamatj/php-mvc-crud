@@ -50,7 +50,7 @@ class QueryBuilder {
 
     public function create($table, $data) {
         $sql = sprintf(
-            'insert into %s (%s) values (%s)',
+            "INSERT INTO %s (%s) VALUES (%s)",
             $table,
             implode(', ', array_keys($data)),
             ':' . implode(', :', array_keys($data))
@@ -61,6 +61,27 @@ class QueryBuilder {
             $statement->execute($data);
 
             return $this->pdo->lastInsertId();
+        } catch(PDOException $e) {
+            die("Whoops! Something went wrong!");
+        }
+    }
+
+    public function update($table, $data, $id) {
+        $dataKeyBinds = array_map(function($key) {
+            return "{$key}=:{$key}";
+        }, array_keys($data));
+
+        $sql = sprintf(
+            "UPDATE %s SET %s WHERE id=:id",
+            $table,
+            implode(', ', $dataKeyBinds)
+        );
+
+        $data['id'] = $id;
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($data);
         } catch(PDOException $e) {
             die("Whoops! Something went wrong!");
         }

@@ -2,7 +2,10 @@
     <div class="container">
         <header class="row mt-3 mb-3">
             <div class="col-md-6">
-                <h3><a href="<?= route('/') ?>">Posts</a></h3>
+                <h3>
+                    <a href="<?= route('/') ?>">Posts</a>
+                    - <?= $post->title ?>
+                </h3>
             </div>
             <div class="col-md-6 text-right">
                 <a href="<?= route('/') ?>" class="btn btn-success">All</a>
