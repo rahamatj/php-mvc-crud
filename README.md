@@ -11,14 +11,17 @@ This is a PHP CRUD following the MVC architectural pattern.
 * Has a basic migration system that creates database tables
 * Uses Bootstrap 4
 
-## Installation Instruction
+## Installation Instructions
 
 * ```git clone https://github.com/rahamatjahan/php-mvc-crud.git```
 * ```cd php-mvc-crud```
 * Create a database called ```php_mvc_crud```
-* ```cp config/database.example.php config/database.php```
-* Change database configuration in ```config/database.php``` if necessary
+* Rename ```config/database.example.php``` to ```config/database.php``` (```mv config/database.example.php config/database.php```)
+* Change database configurations in ```config/database.php``` if necessary
 * ```composer install```
 * ```php run migrate```
-* ```cd public && php -S localhost:8080```
+* Change directory to the public folder (```cd public```) and use php's development server (```php -S localhost:8080```)
 * Open up a browser and go to http://localhost:8080
+
+If you're using something like XAMPP create a virtual host.
+My router isn't built to handle something like http://localhost/dir1/dir2/php-mvc-crud/public.
