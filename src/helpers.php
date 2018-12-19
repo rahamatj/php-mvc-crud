@@ -1,6 +1,5 @@
 <?php
 
-use Exception;
 use Foundation\App;
 use Foundation\Http\Route;
 use Foundation\Http\Request;
@@ -17,10 +16,16 @@ function redirect($path = '') {
     return Redirect::redirect($path);
 }
 
+function base_url(){
+    return Request::baseUrl();
+}
+
 function formatUri($uri, $params) {
     $formattedUri = $uri;
+
     if(!empty($params))
         $formattedUri = $uri . '?' . http_build_query($params);
+
     return $formattedUri != '/' ? base_url() . $formattedUri : base_url();
 }
 
@@ -38,8 +43,4 @@ function route($name, $params = []) {
 
 function app() {
     return (object)App::get('app');
-}
-
-function base_url(){
-    return Request::baseUrl();
 }

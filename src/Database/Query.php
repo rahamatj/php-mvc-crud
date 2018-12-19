@@ -22,4 +22,8 @@ trait Query {
     public static function find($id) {
         return App::get('query')->find(static::$table, static::class, $id);
     }
+
+    public static function create($data) {
+        return App::get('query')->create(static::$table, $data);
+    }
 }

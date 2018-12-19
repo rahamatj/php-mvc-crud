@@ -15,14 +15,14 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" action="">
+                        <form method="post" action="<?= route('posts.store') ?>">
                             <div class="form-group">
                                 <label for="title">Title: </label>
-                                <input type="text" class="form-control" id="title" placeholder="Title ...">
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Title ...">
                             </div>
                             <div class="form-group">
                                 <label for="body">Body: </label>
-                                <textarea class="form-control" id="body" rows="3" placeholder="Body ..."></textarea>
+                                <textarea name="body" class="form-control" id="body" rows="3" placeholder="Body ..."></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-success">

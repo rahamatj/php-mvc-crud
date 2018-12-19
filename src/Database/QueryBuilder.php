@@ -14,8 +14,10 @@ class QueryBuilder {
     }
 
     public function all($table, $class) {
+        $sql = "SELECT * FROM {$table}";
+
         try {
-            $statement = $this->pdo->prepare("SELECT * FROM {$table}");
+            $statement = $this->pdo->prepare($sql);
             $statement->execute();
             $statement->setFetchMode(PDO::FETCH_CLASS, $class);
             $data = $statement->fetchAll();
@@ -27,8 +29,10 @@ class QueryBuilder {
     }
 
     public function find($table, $class, $id) {
+        $sql = "SELECT * FROM {$table} WHERE id = :id";
+
         try {
-            $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE id = :id");
+            $statement = $this->pdo->prepare($sql);
             $statement->execute([
                 'id' => $id
             ]);
@@ -39,6 +43,24 @@ class QueryBuilder {
                 return $data;
 
             throw new Exception("No data found!");
+        } catch(PDOException $e) {
+            die("Whoops! Something went wrong!");
+        }
+    }
+
+    public function create($table, $data) {
+        $sql = sprintf(
+            'insert into %s (%s) values (%s)',
+            $table,
+            implode(', ', array_keys($data)),
+            ':' . implode(', :', array_keys($data))
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($data);
+
+            return $this->pdo->lastInsertId();
         } catch(PDOException $e) {
             die("Whoops! Something went wrong!");
         }
