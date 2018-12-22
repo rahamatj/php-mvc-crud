@@ -70,10 +70,12 @@ class Route extends Router {
     }
 
     public static function get($uri, array $actions) {
+        $uri = trim($uri, '/') ?: '/';
         static::$routes['GET'][$uri] = $actions;
     }
 
     public static function post($uri, array $actions) {
+        $uri = trim($uri, '/') ?: '/';
         static::$routes['POST'][$uri] = $actions;
     }
 }
