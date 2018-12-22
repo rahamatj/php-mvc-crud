@@ -6,7 +6,8 @@
     "license": "MIT",
     "autoload": {
         "classmap": [
-            "database/migrations"
+            "database/migrations",
+            "database/seeders"
         ],
         "psr-4": {
             "App\\": "app/",

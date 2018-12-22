@@ -3,7 +3,6 @@
 use Foundation\Database\Table;
 
 class PostsTable {
-
     public function build() {
         $table = new Table('posts');
         $table->increments('id');

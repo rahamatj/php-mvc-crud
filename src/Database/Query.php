@@ -23,6 +23,10 @@ trait Query {
         return App::get('query')->find(static::$table, static::class, $id);
     }
 
+    public static function first() {
+        return App::get('query')->first(static::$table, static::class);
+    }
+
     public static function create($data) {
         return App::get('query')->create(static::$table, $data);
     }

@@ -48,6 +48,24 @@ class QueryBuilder {
         }
     }
 
+    public function first($table, $class) {
+        $sql = "SELECT * from {$table} ORDER BY id DESC LIMIT 1";
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+            $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            $data = $statement->fetch();
+            
+            if($data)
+                return $data;
+            
+            throw new Exception('No data found!');
+        } catch(PDOException $e) {
+            die("Whoops! Something went wrong!");
+        }
+    }
+
     public function create($table, $data) {
         $sql = sprintf(
             "INSERT INTO %s (%s) VALUES (%s)",

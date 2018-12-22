@@ -4,11 +4,11 @@ namespace Foundation\Console;
 
 use Foundation\App;
 
-class Migrate {
+class Seed {
 
     protected $commandsWhitelist = [
-        'all' => 'Foundation\Console\Migrate\All',
-        'table' => 'Foundation\Console\Migrate\Table'
+        'all' => 'Foundation\Console\Seed\All',
+        'table' => 'Foundation\Console\Seed\Table'
     ];
 
     public function execute($args) {
@@ -35,7 +35,7 @@ class Migrate {
     protected function outputHelp() {
         echo 'Available commands:' . PHP_EOL;
         foreach($this->commandsWhitelist as $key => $value) {
-            echo 'php run migrate ' . $key . PHP_EOL;
+            echo 'php run seed ' . $key . PHP_EOL;
         }
 
         return false;

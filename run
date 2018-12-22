@@ -2,6 +2,7 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/bootstrap/app.php';
 
 $run = new Foundation\Console\Run;
 $executeState = $run->execute($argv);
