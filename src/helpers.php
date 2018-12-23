@@ -16,6 +16,11 @@ function dd(...$args) {
     die();
 }
 
+function asset($path = '/') {
+    $path = trim($path, '/');
+    return Request::appUrl() . '/' . $path;
+}
+
 function app() {
     return (object)App::get('app');
 }
