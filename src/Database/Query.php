@@ -38,4 +38,30 @@ trait Query {
     public function delete() {
         return APP::get('query')->delete(static::$table, $this->id);
     }
+
+    public static function orderBy($field, $order) {
+        App::get('query')->setQuery(
+            App::get('query')->orderBy($field, $order)
+                                ->getQuery()
+        );
+
+        return new static;
+    }
+
+    public static function where($condition) {
+        App::get('query')->setQuery(
+            App::get('query')->where($condition)
+                            ->getQuery()
+        );
+
+        return new static;
+    }
+
+    public function get() {
+        $table = static::$table;
+        App::get('query')->setQuery(
+            "SELECT * FROM {$table} " . App::get('query')->getQuery()
+        );
+        return App::get('query')->get(static::class);
+    }
 }

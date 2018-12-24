@@ -8,6 +8,7 @@ use PDOException;
 
 class QueryBuilder {
     protected $pdo;
+    protected $query = "";
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
@@ -49,7 +50,7 @@ class QueryBuilder {
     }
 
     public function first($table, $class) {
-        $sql = "SELECT * from {$table} ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT * FROM {$table} ORDER BY id DESC LIMIT 1";
 
         try {
             $statement = $this->pdo->prepare($sql);
@@ -115,6 +116,47 @@ class QueryBuilder {
             ]);
         } catch(PDOException $e) {
             die("Whoops! Something went wrong!");
+        }
+    }
+
+    public function select($table) {
+        $this->query .= "SELECT * FROM {$table} ";
+
+        return $this;
+    }
+
+    public function setQuery($query) {
+        $this->query = $query;
+
+        return $this;
+    }
+
+    public function getquery() {
+        return $this->query;
+    }
+
+    public function orderBy($field, $order) {
+        $this->query .= "ORDER BY {$field} {$order} ";
+
+        return $this;
+    }
+
+    public function where($condition) {
+        $this->query .= "WHERE {$condition} ";
+
+        return $this;
+    }
+
+    public function get($class) {
+        try {
+            $statement = $this->pdo->prepare($this->query);
+            $statement->execute();
+            $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            $data = $statement->fetchAll();
+
+            return $data;
+        } catch(PDOException $e) {
+            die("Whoops! Somethig went wrong!");
         }
     }
 }
