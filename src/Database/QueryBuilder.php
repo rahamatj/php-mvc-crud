@@ -14,13 +14,17 @@ class QueryBuilder {
         $this->pdo = $pdo;
     }
 
-    public function all($table, $class) {
+    public function all($table, $class = null) {
         $sql = "SELECT * FROM {$table}";
 
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute();
-            $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            if($class != null)
+                $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            else
+                $statement->setFetchMode(PDO::FETCH_OBJ);
+
             $data = $statement->fetchAll();
 
             return $data;
@@ -29,7 +33,7 @@ class QueryBuilder {
         }
     }
 
-    public function find($table, $class, $id) {
+    public function find($table, $id, $class = null) {
         $sql = "SELECT * FROM {$table} WHERE id = :id";
 
         try {
@@ -37,8 +41,13 @@ class QueryBuilder {
             $statement->execute([
                 'id' => $id
             ]);
-            $statement->setFetchMode(PDO::FETCH_CLASS, $class);
-            $data  = $statement->fetch();
+
+            if($class != null)
+                $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            else
+                $statement->setFetchMode(PDO::FETCH_OBJ);
+
+            $data = $statement->fetch();
 
             if($data)
                 return $data;
@@ -49,18 +58,22 @@ class QueryBuilder {
         }
     }
 
-    public function first($table, $class) {
+    public function first($table, $class = null) {
         $sql = "SELECT * FROM {$table} ORDER BY id DESC LIMIT 1";
 
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute();
-            $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            if($class != null)
+                $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            else
+                $statement->setFetchMode(PDO::FETCH_OBJ);
+
             $data = $statement->fetch();
             
             if($data)
                 return $data;
-            
+
             throw new Exception('No data found!');
         } catch(PDOException $e) {
             die("Whoops! Something went wrong!");
@@ -147,14 +160,49 @@ class QueryBuilder {
         return $this;
     }
 
-    public function get($class) {
+    public function andWhere($condition) {
+        $this->query .= "AND {$condition} ";
+
+        return $this;
+    }
+
+    public function OrWhere($condition) {
+        $this->query .= "OR {$condition} ";
+
+        return $this;
+    }
+
+    public function get($class = null) {
         try {
             $statement = $this->pdo->prepare($this->query);
             $statement->execute();
-            $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            if($class != null)
+                $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            else
+                $statement->setFetchMode(PDO::FETCH_OBJ);
             $data = $statement->fetchAll();
 
             return $data;
+        } catch(PDOException $e) {
+            die("Whoops! Somethig went wrong!");
+        }
+    }
+
+    public function getFirst($class = null) {
+        $this->query .= "LIMIT 1";
+        try {
+            $statement = $this->pdo->prepare($this->query);
+            $statement->execute();
+            if($class != null)
+                $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+            else
+                $statement->setFetchMode(PDO::FETCH_OBJ);
+            $data = $statement->fetch();
+
+            if($data)
+                return $data;
+
+            throw new Exception('No data found!');
         } catch(PDOException $e) {
             die("Whoops! Somethig went wrong!");
         }

@@ -1,6 +1,7 @@
 <?php
 
 use Foundation\App;
+use Foundation\Session;
 use Foundation\Http\Route;
 use Foundation\Http\Request;
 use Foundation\Http\Redirect;
@@ -23,6 +24,27 @@ function asset($path = '/') {
 
 function app() {
     return (object)App::get('app');
+}
+
+function request() {
+    return new Request;
+}
+
+function mysql_date($date) {
+    return date_format(date_create($date), "Y-m-d");
+}
+
+function session($title, $body = null) {
+    if($body == null) {
+        return Session::get($title);
+    } else {
+        Session::put($title, $body);
+    }
+}
+
+function user_name($email) {
+    $emailParts = explode("@", $email);
+    return $emailParts[0];
 }
 
 function base_uri() {

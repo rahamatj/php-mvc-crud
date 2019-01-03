@@ -20,7 +20,7 @@ trait Query {
     }
 
     public static function find($id) {
-        return App::get('query')->find(static::$table, static::class, $id);
+        return App::get('query')->find(static::$table, $id, static::class);
     }
 
     public static function first() {
@@ -57,11 +57,37 @@ trait Query {
         return new static;
     }
 
+    public function andWhere($condition) {
+        App::get('query')->setQuery(
+            App::get('query')->andWhere($condition)
+                            ->getQuery()
+        );
+
+        return new static;
+    }
+
+    public function orWhere($condition) {
+        App::get('query')->setQuery(
+            App::get('query')->orWhere($condition)
+                            ->getQuery()
+        );
+
+        return new static;
+    }
+
     public function get() {
         $table = static::$table;
         App::get('query')->setQuery(
             "SELECT * FROM {$table} " . App::get('query')->getQuery()
         );
         return App::get('query')->get(static::class);
+    }
+
+    public function getFirst() {
+        $table = static::$table;
+        App::get('query')->setQuery(
+            "SELECT * FROM {$table} " . App::get('query')->getQuery()
+        );
+        return App::get('query')->getFirst(static::class);
     }
 }
