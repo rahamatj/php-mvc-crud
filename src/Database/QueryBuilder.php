@@ -12,6 +12,7 @@ class QueryBuilder {
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
+        $this->query = "";
     }
 
     public function all($table, $class = null) {
@@ -173,6 +174,7 @@ class QueryBuilder {
     }
 
     public function get($class = null) {
+        // dd($this->query);
         try {
             $statement = $this->pdo->prepare($this->query);
             $statement->execute();
