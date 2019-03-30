@@ -13,7 +13,7 @@ This is a PHP CRUD following the MVC architectural pattern.
 
 ## Installation Instructions
 
-* ```git clone https://github.com/rahamatjahan/php-mvc-crud.git```
+* ```git clone https://github.com/rahamatj/php-mvc-crud.git```
 * ```cd php-mvc-crud```
 * Create a database called ```php_mvc_crud```
 * Rename ```config/database.example.php``` to ```config/database.php```
