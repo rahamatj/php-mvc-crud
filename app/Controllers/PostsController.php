@@ -7,6 +7,10 @@ use App\Post;
 class PostsController {
 
     public function index() {
+        // $posts = Post::all();
+
+        // dd($posts);
+
         return view('posts.index', [
             'posts' => Post::all()
         ]);

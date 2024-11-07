@@ -30,7 +30,7 @@ class QueryBuilder {
 
             return $data;
         } catch(PDOException $e) {
-            die("Whoops! Somethig went wrong!");
+            die("Whoops! Something went wrong!");
         }
     }
 
